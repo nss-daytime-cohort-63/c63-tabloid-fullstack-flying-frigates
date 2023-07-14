@@ -1,15 +1,10 @@
-import React from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Login";
-import Register from "./Register";
-import Hello from "./Hello";
-import TagList from "./TagList"
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Hello from './Hello'
 import PostList from './PostList' 
+import TagList from './TagList'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
