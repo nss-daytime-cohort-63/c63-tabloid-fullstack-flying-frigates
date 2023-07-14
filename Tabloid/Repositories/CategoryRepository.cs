@@ -23,7 +23,7 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Name FROM Category";
+                    cmd.CommandText = @"SELECT Id, Name FROM Category ORDER BY NAME";
                     using (var reader = cmd.ExecuteReader())
                     {
                         var categories = new List<Category>();
@@ -42,17 +42,17 @@ namespace Tabloid.Repositories
             }
         }
 
-        //public Category GetById(int id)
-        //{ return null; }
+        public Category GetById(int id)
+        { return null; }
 
-        //public void Add(Category category)
-        //{ }
+        public void Add(Category category)
+        { }
 
-        //public void Update(Category category)
-        //{ }
+        public void Update(Category category)
+        { }
 
-        //public void Delete(int id)
-        //{ }
+        public void Delete(int id)
+        { }
 
     }
 }
