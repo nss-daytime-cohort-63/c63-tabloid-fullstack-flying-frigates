@@ -1,6 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -21,17 +23,18 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT Id, Name FROM Category ORDER BY Name ASC";
+                    cmd.CommandText = @"SELECT Id, Name FROM Category";
                     using (var reader = cmd.ExecuteReader())
                     {
                         var categories = new List<Category>();
                         while (reader.Read())
                         {
-                            categories.Add(new Category()
+                            var category = new Category()
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 Name = DbUtils.GetString(reader, "Name")
-                            });
+                            };
+                            categories.Add(category);
                         }
                         return categories;
                     }
@@ -39,17 +42,17 @@ namespace Tabloid.Repositories
             }
         }
 
-        public Category GetById(int id)
-        { return null; }
+        //public Category GetById(int id)
+        //{ return null; }
 
-        public void Add(Category category)
-        { }
+        //public void Add(Category category)
+        //{ }
 
-        public void Update(Category category)
-        { }
+        //public void Update(Category category)
+        //{ }
 
-        public void Delete(int id)
-        { }
+        //public void Delete(int id)
+        //{ }
 
     }
 }
