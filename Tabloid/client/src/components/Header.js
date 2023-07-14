@@ -9,7 +9,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import { logout } from '../modules/authManager';
+import PostsList, { logout } from '../modules/authManager';
 
 export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,6 +35,10 @@ export default function Header({ isLoggedIn }) {
                 <NavItem>
                   <a aria-current="page" className="nav-link"
                     style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                </NavItem>
+                <NavItem>
+                  <a aria-current="page" className="nav-link"
+                    style={{ cursor: "pointer" }} onClick={PostsList} >Posts</a>
                 </NavItem>
               </>
             }
