@@ -7,9 +7,14 @@
 
   <ItemGroup>
     <Compile Remove="client\**" />
+    <Compile Remove="Properties\**" />
     <Content Remove="client\**" />
+    <Content Remove="Properties\**" />
     <EmbeddedResource Remove="client\**" />
+    <EmbeddedResource Remove="Properties\**" />
     <None Remove="client\**" />
+    <None Remove="Properties\**" />
+    <_WebToolingArtifacts Remove="Properties\**" />
   </ItemGroup>
 
   <ItemGroup>
