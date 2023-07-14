@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
-import PostsList from "./Posts";
+import UserProfileList from "./UserProfile";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -16,7 +16,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="posts" element={<PostsList/>} />
+          <Route path="userprofiles" element={<UserProfileList/>} />
         </Route>
       </Routes>
     </main>
