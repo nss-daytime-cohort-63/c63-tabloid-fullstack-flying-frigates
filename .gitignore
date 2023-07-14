@@ -341,3 +341,5 @@ healthchecksdb
 
 *.swp
 appsettings.Local.json
+01_Tabloid_Create_DB.SQL
+02_Tabloid_Seed_Data.SQL
