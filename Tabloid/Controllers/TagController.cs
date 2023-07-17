@@ -8,7 +8,7 @@ namespace Tabloid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+
     public class TagController : ControllerBase
     {
         private readonly ITagRepository _tagRepository;

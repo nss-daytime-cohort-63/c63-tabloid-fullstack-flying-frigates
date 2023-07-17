@@ -15,10 +15,6 @@ export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const handleLogout = () => {
-    logout();
-  };
-
   return (
     <div>
       <Navbar color="light" light expand="md">
@@ -67,19 +63,33 @@ export default function Header({ isLoggedIn }) {
               </NavItem>
             )}
           </Nav>
-          <Nav navbar>
-            {isLoggedIn ? (
+          <Nav navbar> 
               <NavItem>
-                <a
-                  aria-current="page"
-                  className="nav-link"
-                  style={{ cursor: 'pointer' }}
-                  onClick={handleLogout}
-                >
-                  Logout
-                </a>
+                <NavLink tag={RRNavLink} to="/tag/manager">Tag Management</NavLink>
               </NavItem>
-            ) : (
+          </Nav>
+          <Nav navbar>
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/PostManager">Post Management</NavLink>
+              </NavItem>}
+          </Nav>
+          <Nav navbar>
+            {isLoggedIn &&
+              <>
+                <NavItem>
+                  <a
+                    aria-current="page"
+                    className="nav-link"
+                    style={{ cursor: 'pointer' }}
+                    onClick={logout}
+                  >
+                    Logout
+                  </a>
+                </NavItem>
+              </>
+            }
+            {!isLoggedIn && (
               <>
                 <NavItem>
                   <NavLink tag={RRNavLink} to="/login">
