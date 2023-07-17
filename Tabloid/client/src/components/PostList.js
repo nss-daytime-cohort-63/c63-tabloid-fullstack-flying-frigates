@@ -27,11 +27,10 @@ export default function PostList() {
   return (
     <div>
       <h1>Posts</h1>
-      <Link to="/post/add">Add Post</Link>
       <ul>
         {posts.map((post) => (
           <li key={post.id}>
-            <Link to={`/post/${post.id}`}>{post.title}</Link>
+            <Link to={`/posts/${post.id}`}>{post.title}</Link>
             <p>Author: {post.userProfile.displayName}</p>
             <p>Category: {post.category.name}</p>
           </li>
