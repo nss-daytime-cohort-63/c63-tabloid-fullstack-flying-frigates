@@ -6,6 +6,7 @@ import Hello from './Hello'
 import PostList from './PostList'
 import TagList from './TagList'
 import CategoryList from './CategoryList'
+import CategoryAddForm from './CategoryAddForm'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -19,7 +20,10 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route path="tag">
             <Route path="manager" element={isLoggedIn ? <TagList /> : <p>Whoops, nothing here...</p>} />
           </Route>
-          <Route path="CategoryManager" element={isLoggedIn ? <CategoryList /> : <Navigate to="/login" />} />
+          <Route path="category">
+            <Route path="manager" element={isLoggedIn ? <CategoryList /> : <Navigate to="/login" />} />
+            <Route path="add" element={isLoggedIn ? <CategoryAddForm /> : <Navigate to="/login" />} />
+          </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="posts" element={<PostList />} />
