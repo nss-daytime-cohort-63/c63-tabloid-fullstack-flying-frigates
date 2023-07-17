@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { getAllUserProfiles } from "../modules/userProfileManager";
 
-export default function UserProfileList() {
+export default function UserProfilesList() {
   const [userProfiles, setUserProfiles] = useState([]);
 
   useEffect(() => {
     const fetchUserProfiles = async () => {
       try {
-        const response = await fetch("/api/userprofiles");
-        if (response.ok) {
-          const data = await response.json();
-          setUserProfiles(data);
-        } else {
-          throw new Error("Failed to fetch user profiles");
-        }
+        const data = await getAllUserProfiles();
+        setUserProfiles(data);
       } catch (error) {
         console.error(error);
       }
@@ -21,16 +17,19 @@ export default function UserProfileList() {
     fetchUserProfiles();
   }, []);
 
+  // Sort the user profiles alphabetically by display name
+  const sortedUserProfiles = userProfiles.sort((a, b) => a.displayName.localeCompare(b.displayName));
+
   return (
     <div>
       <h2>User Profiles List</h2>
-      {userProfiles.map((userProfile) => (
+      {sortedUserProfiles.map((userProfile) => (
         <div key={userProfile.id}>
           <h3>{userProfile.displayName}</h3>
-          <p>Email: {userProfile.email}</p>
-          <p>Image Location: {userProfile.imageLocation}</p>
+          <p>Full Name: {userProfile.firstName} {userProfile.lastName}</p>
+          <p>User Type: {userProfile.userType.name}</p>
         </div>
       ))}
     </div>
   );
-};
+}

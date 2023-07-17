@@ -18,7 +18,7 @@ namespace Tabloid.Controllers
             _userProfileRepository = userProfileRepository;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<UserProfile>> GetAllUserProfiles()
+        public IActionResult GetAllUserProfiles()
         {
             var userProfiles = _userProfileRepository.GetAllUserProfiles();
             return Ok(userProfiles);

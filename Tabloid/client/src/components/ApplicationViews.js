@@ -4,6 +4,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import TagList from "./TagList"
+import UserProfileList from "./UserProfile";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
