@@ -25,12 +25,14 @@ namespace Tabloid.Controllers
         }
 
         [HttpGet("{firebaseUserId}")]
+        [Authorize]
         public IActionResult GetUserProfile(string firebaseUserId)
         {
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
         }
 
         [HttpGet("DoesUserExist/{firebaseUserId}")]
+        [Authorize]
         public IActionResult DoesUserExist(string firebaseUserId)
         {
             var userProfile = _userProfileRepository.GetByFirebaseUserId(firebaseUserId);
@@ -42,6 +44,7 @@ namespace Tabloid.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Post(UserProfile userProfile)
         {
             userProfile.CreateDateTime = DateTime.Now;

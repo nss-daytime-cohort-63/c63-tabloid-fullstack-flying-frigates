@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
 import { NavLink as RRNavLink } from 'react-router-dom';
-import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 import { logout } from '../modules/authManager';
 
 export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
   const handleLogout = () => {
     logout();
-  };
-
-  const toggleNavbar = () => {
-    setIsOpen(!isOpen);
   };
 
   return (
@@ -20,18 +25,33 @@ export default function Header({ isLoggedIn }) {
         <NavbarBrand tag={RRNavLink} to="/">
           Tabloid
         </NavbarBrand>
-        <NavbarToggler onClick={toggleNavbar} />
+        <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
+            {/* When isLoggedIn === true, we will render the Home link */}
             {isLoggedIn && (
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/">
-                  Home
-                </NavLink>
-              </NavItem>
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/">
+                    Home
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/posts">
+                    View Posts
+                  </NavLink>
+                </NavItem>
+              </>
             )}
           </Nav>
           <Nav navbar>
+            {isLoggedIn && (
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/CategoryManager">
+                  Category Management
+                </NavLink>
+              </NavItem>
+            )}
             {isLoggedIn && (
               <NavItem>
                 <NavLink tag={RRNavLink} to="/TagManager">
@@ -39,35 +59,40 @@ export default function Header({ isLoggedIn }) {
                 </NavLink>
               </NavItem>
             )}
-            <Nav navbar>
-              {isLoggedIn ? (
-                <>
-                  <NavItem>
-                    <NavLink onClick={handleLogout} style={{ cursor: 'pointer' }}>
-                      Logout
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={RRNavLink} to="/userprofiles">
-                      User Profile
-                    </NavLink>
-                  </NavItem>
-                </>
-              ) : (
-                <>
-                  <NavItem>
-                    <NavLink tag={RRNavLink} to="/login">
-                      Login
-                    </NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={RRNavLink} to="/register">
-                      Register
-                    </NavLink>
-                  </NavItem>
-                </>
-              )}
-            </Nav>
+            {isLoggedIn && (
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/PostManager">
+                  Post Management
+                </NavLink>
+              </NavItem>
+            )}
+          </Nav>
+          <Nav navbar>
+            {isLoggedIn ? (
+              <NavItem>
+                <a
+                  aria-current="page"
+                  className="nav-link"
+                  style={{ cursor: 'pointer' }}
+                  onClick={handleLogout}
+                >
+                  Logout
+                </a>
+              </NavItem>
+            ) : (
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/login">
+                    Login
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/register">
+                    Register
+                  </NavLink>
+                </NavItem>
+              </>
+            )}
           </Nav>
         </Collapse>
       </Navbar>
