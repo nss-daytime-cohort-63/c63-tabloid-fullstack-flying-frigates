@@ -16,10 +16,9 @@ namespace Tabloid.Controllers
         private readonly ICategoryRepository _categoryRepository;
         private readonly IUserProfileRepository _userProfileRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository, IUserProfileRepository userProfileRepository)
+        public CategoryController(ICategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
-            _userProfileRepository = userProfileRepository;
         }
 
         [HttpGet]
