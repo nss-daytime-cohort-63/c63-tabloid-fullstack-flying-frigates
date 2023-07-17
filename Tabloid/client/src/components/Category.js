@@ -1,9 +1,15 @@
 import { React } from "react";
+import { Card, CardBody } from "reactstrap";
+
 
 export const Category = ({ category }) => {
   return (
-    <li>
-      {category.name}
-    </li>
+    <Card className="m-4">
+      <CardBody>
+        <strong>
+          {category.name}
+        </strong>
+      </CardBody>
+    </Card>
   )
 }

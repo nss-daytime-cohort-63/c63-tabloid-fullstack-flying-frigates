@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { NavLink as RRNavLink } from 'react-router-dom';
+import React, { useState } from 'react'
+import { NavLink as RRNavLink } from 'react-router-dom'
 import {
   Collapse,
   Navbar,
@@ -8,12 +8,12 @@ import {
   Nav,
   NavItem,
   NavLink,
-} from 'reactstrap';
-import { logout } from '../modules/authManager';
+} from 'reactstrap'
+import { logout } from '../modules/authManager'
 
 export default function Header({ isLoggedIn }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
+  const [isOpen, setIsOpen] = useState(false)
+  const toggle = () => setIsOpen(!isOpen)
 
   return (
     <div>
@@ -41,13 +41,14 @@ export default function Header({ isLoggedIn }) {
             )}
           </Nav>
           <Nav navbar>
-            {isLoggedIn && (
+            {isLoggedIn &&
               <NavItem>
-                <NavLink tag={RRNavLink} to="/CategoryManager">
+                <NavLink tag={RRNavLink} to="/category/manager">
                   Category Management
                 </NavLink>
-              </NavItem>
-            )}
+              </NavItem>}
+          </Nav>
+          <Nav navbar>
             {isLoggedIn && (
               <NavItem>
                 <NavLink tag={RRNavLink} to="/PostManager">
@@ -56,15 +57,15 @@ export default function Header({ isLoggedIn }) {
               </NavItem>
             )}
           </Nav>
-          <Nav navbar> 
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/tag/manager">Tag Management</NavLink>
-              </NavItem>
+          <Nav navbar>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/tag/manager">Tag Management</NavLink>
+            </NavItem>
           </Nav>
-          <Nav navbar> 
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/userprofiles">User Profile</NavLink>
-              </NavItem>
+          <Nav navbar>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/userprofiles">User Profile</NavLink>
+            </NavItem>
           </Nav>
           <Nav navbar>
             {isLoggedIn &&
@@ -99,5 +100,5 @@ export default function Header({ isLoggedIn }) {
         </Collapse>
       </Navbar>
     </div>
-  );
+  )
 }

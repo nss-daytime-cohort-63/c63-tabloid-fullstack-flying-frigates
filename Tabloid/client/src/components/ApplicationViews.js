@@ -20,10 +20,14 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route path="tag">
             <Route path="manager" element={isLoggedIn ? <TagList /> : <p>Whoops, nothing here...</p>} />
           </Route>
-          <Route path="CategoryManager" element={isLoggedIn ? <CategoryList /> : <Navigate to="/login" />} />
+          <Route path="category">
+            <Route path="manager" element={isLoggedIn ? <CategoryList /> : <Navigate to="/login" />} />
+            <Route path="add" element={isLoggedIn ? <CategoryAddForm /> : <Navigate to="/login" />} />
+          </Route>
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="userprofiles" element={<UserProfileList/>} />         
+
+          <Route path="userprofiles" element={<UserProfileList />} />
           <Route path="posts" element={<PostList />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
