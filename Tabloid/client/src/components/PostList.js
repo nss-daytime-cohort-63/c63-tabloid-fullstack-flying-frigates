@@ -6,7 +6,22 @@ export default function PostList() {
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
-    getAllPosts().then(setPosts)
+    // Get all posts
+    getAllPosts().then((postsFromAPI) => {
+      const currentDateTime = new Date()
+      // Filter the list to only include approved posts with a past publication date
+      const approvedPastPosts = postsFromAPI
+        .filter(
+          (p) => p.isApproved && new Date(p.publishDateTime) < currentDateTime
+        )
+        // Sort the posts by publication date in descending order
+        .sort(
+          (a, b) => new Date(b.publishDateTime) - new Date(a.publishDateTime)
+        )
+
+      // Set the approved posts to state
+      setPosts(approvedPastPosts)
+    })
   }, [])
 
   return (
@@ -17,6 +32,8 @@ export default function PostList() {
         {posts.map((post) => (
           <li key={post.id}>
             <Link to={`/post/${post.id}`}>{post.title}</Link>
+            <p>Author: {post.userProfile.displayName}</p>
+            <p>Category: {post.category.name}</p>
           </li>
         ))}
       </ul>

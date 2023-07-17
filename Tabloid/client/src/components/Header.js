@@ -47,7 +47,6 @@ export default function Header({ isLoggedIn }) {
               </NavItem>}
           </Nav>
           <Nav navbar>
-            {isLoggedIn &&
             {isLoggedIn && (
               <>
                 <NavItem>

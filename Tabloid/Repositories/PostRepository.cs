@@ -20,11 +20,13 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
     SELECT p.Id, p.Title, p.Content, p.ImageLocation, p.CreateDateTime, p.PublishDateTime, p.IsApproved, p.CategoryId, p.UserProfileId,
-        up.FirstName, up.LastName, up.DisplayName, up.Email, up.CreateDateTime AS UserProfileDateCreated,
-        up.ImageLocation AS UserProfileImageLocation
-    FROM Post p
-    JOIN UserProfile up ON p.UserProfileId = up.Id
-    ORDER BY PublishDateTime";
+    up.FirstName, up.LastName, up.DisplayName, up.Email, up.CreateDateTime AS UserProfileDateCreated,
+    up.ImageLocation AS UserProfileImageLocation,
+    c.Id AS CategoryId, c.Name AS CategoryName
+FROM Post p
+JOIN UserProfile up ON p.UserProfileId = up.Id
+JOIN Category c ON p.CategoryId = c.Id
+ORDER BY p.PublishDateTime";
 
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -52,6 +54,11 @@ namespace Tabloid.Repositories
                                     Email = DbUtils.GetString(reader, "Email"),
                                     CreateDateTime = DbUtils.GetDateTime(reader, "UserProfileDateCreated"),
                                     ImageLocation = DbUtils.GetString(reader, "UserProfileImageLocation"),
+                                },
+                                Category = new Category()
+                                {
+                                    Id = DbUtils.GetInt(reader, "CategoryId"),
+                                    Name = DbUtils.GetString(reader, "CategoryName"),
                                 },
                             });
                         }
