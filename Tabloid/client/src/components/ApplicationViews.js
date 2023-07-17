@@ -24,6 +24,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
           <Route path="posts" element={<PostList />} />
+          <Route path="posts" element={<PostList />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
       </Routes>
