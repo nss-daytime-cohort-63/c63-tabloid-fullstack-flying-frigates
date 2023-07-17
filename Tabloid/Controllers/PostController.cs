@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
+using System.Threading.Tasks;
 using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
@@ -47,5 +48,16 @@ namespace Tabloid.Controllers
         //    {
         //    }
         //    */
+        [HttpGet("{id}")]
+        public IActionResult GetPost(int id)
+        {
+            var post = _postRepository.GetPost(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(post);
+        } 
     }
 }
