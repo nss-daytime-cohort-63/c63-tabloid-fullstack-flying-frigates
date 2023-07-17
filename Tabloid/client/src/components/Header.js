@@ -47,7 +47,13 @@ export default function Header({ isLoggedIn }) {
               </NavItem>}
           </Nav>
           <Nav navbar>
-            {isLoggedIn && (
+            {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/PostManager">Post Management</NavLink>
+              </NavItem>}
+          </Nav>
+          <Nav navbar>
+            {isLoggedIn &&
               <>
                 <NavItem>
                   <a
@@ -60,7 +66,7 @@ export default function Header({ isLoggedIn }) {
                   </a>
                 </NavItem>
               </>
-            )}
+            }
             {!isLoggedIn && (
               <>
                 <NavItem>
