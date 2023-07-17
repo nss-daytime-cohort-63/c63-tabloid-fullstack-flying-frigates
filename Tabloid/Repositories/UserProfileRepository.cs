@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -51,6 +52,53 @@ namespace Tabloid.Repositories
                     reader.Close();
 
                     return userProfile;
+                }
+            }
+        }
+        public List<UserProfile> GetAllUserProfiles()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT up.Id, up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName,
+                               up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
+                               ut.Name AS UserTypeName
+                        FROM UserProfile up
+                        LEFT JOIN UserType ut ON up.UserTypeId = ut.Id";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var userProfiles = new List<UserProfile>();
+
+                    while (reader.Read())
+                    {
+                        var userProfile = new UserProfile()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            FirebaseUserId = reader.GetString(reader.GetOrdinal("FirebaseUserId")),
+                            FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                            LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                            DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                            Email = reader.GetString(reader.GetOrdinal("Email")),
+                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                            ImageLocation = reader.GetString(reader.GetOrdinal("ImageLocation")),
+                            UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                            UserType = new UserType()
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                                Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                            }
+                        };
+
+                        userProfiles.Add(userProfile);
+                    }
+
+                    reader.Close();
+
+                    return userProfiles;
                 }
             }
         }

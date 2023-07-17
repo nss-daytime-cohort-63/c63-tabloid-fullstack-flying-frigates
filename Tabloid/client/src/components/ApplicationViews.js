@@ -1,11 +1,12 @@
-import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
-import Login from './Login'
-import Register from './Register'
-import Hello from './Hello'
-import PostList from './PostList'
-import TagList from './TagList'
-import CategoryList from './CategoryList'
+import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./Login";
+import Register from "./Register";
+import Hello from "./Hello";
+import TagList from "./TagList"
+import UserProfileList from "./UserProfile";
+import PostList from "./PostList";
+import CategoryList from "./CategoryList";
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -22,7 +23,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route path="CategoryManager" element={isLoggedIn ? <CategoryList /> : <Navigate to="/login" />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="posts" element={<PostList />} />
+          <Route path="userprofiles" element={<UserProfileList/>} />         
           <Route path="posts" element={<PostList />} />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
