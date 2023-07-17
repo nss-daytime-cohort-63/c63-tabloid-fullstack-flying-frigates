@@ -43,14 +43,29 @@ export default function Header({ isLoggedIn }) {
           <Nav navbar>
             {isLoggedIn &&
               <NavItem>
-                <NavLink tag={RRNavLink} to="/TagManager">Tag Management</NavLink>
+                <NavLink tag={RRNavLink} to="/category/manager">
+                  Category Management
+                </NavLink>
               </NavItem>}
           </Nav>
           <Nav navbar>
-            {isLoggedIn &&
+            {isLoggedIn && (
               <NavItem>
-                <NavLink tag={RRNavLink} to="/PostManager">Post Management</NavLink>
-              </NavItem>}
+                <NavLink tag={RRNavLink} to="/PostManager">
+                  Post Management
+                </NavLink>
+              </NavItem>
+            )}
+          </Nav>
+          <Nav navbar>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/tag/manager">Tag Management</NavLink>
+            </NavItem>
+          </Nav>
+          <Nav navbar>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/userprofiles">User Profile</NavLink>
+            </NavItem>
           </Nav>
           <Nav navbar>
             {isLoggedIn &&
