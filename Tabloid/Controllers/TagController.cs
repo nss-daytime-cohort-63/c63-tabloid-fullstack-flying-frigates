@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Tabloid.Repositories;
+using Tabloid.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -25,18 +26,20 @@ namespace Tabloid.Controllers
             return Ok(alphabetizedTags);
         }
 
+        // POST api/<TagController>
+        [HttpPost]
+        public IActionResult Post(Tag tag)
+        {
+            _tagRepository.Add(tag);
+            return CreatedAtAction(nameof(Get), new { id = tag.Id }, tag);
+        }
+
         /*Ignore these for now
         // GET api/<TagController>/5
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
-        }
-
-        // POST api/<TagController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
         }
 
         // PUT api/<TagController>/5
