@@ -3,8 +3,9 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Login'
 import Register from './Register'
 import Hello from './Hello'
-import PostList from './PostList' 
+import PostList from './PostList'
 import TagList from './TagList'
+import PostDetail from './PostDetail'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -15,10 +16,20 @@ export default function ApplicationViews({ isLoggedIn }) {
             index
             element={isLoggedIn ? <Hello /> : <Navigate to="/login" />}
           />
-          <Route path="TagManager" element={isLoggedIn ? <TagList /> : <Navigate to="/login" />} />
+          <Route
+            path="TagManager"
+            element={isLoggedIn ? <TagList /> : <Navigate to="/login" />}
+          />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="posts" element={<PostList />} /> 
+          <Route
+            path="posts"
+            element={isLoggedIn ? <PostList /> : <Navigate to="/login" />}
+          />
+            <Route
+              path="posts/:id"
+              element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
+            />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
       </Routes>
