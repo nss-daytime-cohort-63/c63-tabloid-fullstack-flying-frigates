@@ -11,6 +11,7 @@ import CategoryAddForm from './CategoryAddForm'
 import PostDetail from './PostDetail'
 import TagAddForm from './TagAddForm'
 import PostForm from './PostForm'
+import Comments from './Comments'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -24,9 +25,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route path="tag">
             <Route
               path="manager"
-              element={
-                isLoggedIn ? <TagList /> : <p>Whoops, nothing here...</p>
-              }
+              element={isLoggedIn ? <TagList /> : <Navigate to="/login" />}
             />
             <Route path="add" element={isLoggedIn ? <TagAddForm /> : <p>Whoops, nothing here...</p>} />
           </Route>
@@ -57,6 +56,9 @@ export default function ApplicationViews({ isLoggedIn }) {
         <Route
           path="posts/:id"
           element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
+        />
+        <Route path="comments/:id"
+        element={isLoggedIn ? <Comments /> : <Navigate to="/login" /> }
         />
         <Route path="*" element={<p>Whoops, nothing here...</p>} />
       </Routes>
