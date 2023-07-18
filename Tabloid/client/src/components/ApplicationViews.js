@@ -10,6 +10,7 @@ import CategoryList from './CategoryList'
 import CategoryAddForm from './CategoryAddForm'
 import PostDetail from './PostDetail'
 import TagAddForm from './TagAddForm'
+import PostForm from './PostForm'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -41,18 +42,24 @@ export default function ApplicationViews({ isLoggedIn }) {
               }
             />
           </Route>
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-
-          <Route path="userprofiles" element={<UserProfileList />} />
-          <Route path="posts" element={<PostList />} />
           <Route
-            path="posts/:id"
-            element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
+            path="newPost"
+            element={
+              isLoggedIn ? <PostForm /> : <Navigate to="/login" />
+            }
           />
-          <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+
+        <Route path="userprofiles" element={<UserProfileList />} />
+        <Route path="posts" element={<PostList />} />
+        <Route
+          path="posts/:id"
+          element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
+        />
+        <Route path="*" element={<p>Whoops, nothing here...</p>} />
       </Routes>
-    </main>
+    </main >
   )
 }
