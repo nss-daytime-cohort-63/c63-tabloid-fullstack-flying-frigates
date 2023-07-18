@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Card, CardHeader, CardTitle, CardBody } from "reactstrap";
-import { addTag } from "../modules/tagManager";
+import { addTag } from "../../modules/tagManager";
 
 export default function TagAddForm() {
     const [tagName, setTagName] = useState("")

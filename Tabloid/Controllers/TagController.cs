@@ -34,6 +34,14 @@ namespace Tabloid.Controllers
             return CreatedAtAction(nameof(Get), new { id = tag.Id }, tag);
         }
 
+        // DELETE api/<TagController>/5
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _tagRepository.Delete(id);
+            return NoContent();
+        }
+
         /*Ignore these for now
         // GET api/<TagController>/5
         [HttpGet("{id}")]
@@ -45,12 +53,6 @@ namespace Tabloid.Controllers
         // PUT api/<TagController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<TagController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
         {
         }
         */
