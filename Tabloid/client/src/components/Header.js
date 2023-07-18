@@ -50,11 +50,16 @@ export default function Header({ isLoggedIn }) {
           </Nav>
           <Nav navbar>
             {isLoggedIn && (
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/PostManager">
-                  Post Management
-                </NavLink>
-              </NavItem>
+              <>
+                <NavItem>
+                  <NavLink tag={RRNavLink} to="/newPost">New Post</NavLink>
+                </NavItem>
+                {/* <NavItem>
+                  <NavLink tag={RRNavLink} to="/PostManager">
+                    Post Management
+                  </NavLink>
+                </NavItem> */}
+              </>
             )}
           </Nav>
           <Nav navbar>
