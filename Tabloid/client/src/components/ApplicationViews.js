@@ -9,6 +9,7 @@ import PostList from './PostList'
 import CategoryList from './CategoryList'
 import CategoryAddForm from './CategoryAddForm'
 import PostDetail from './PostDetail'
+import TagAddForm from './TagAddForm'
 import PostForm from './PostForm'
 import Comments from './Comments'
 
@@ -26,6 +27,7 @@ export default function ApplicationViews({ isLoggedIn }) {
               path="manager"
               element={isLoggedIn ? <TagList /> : <Navigate to="/login" />}
             />
+            <Route path="add" element={isLoggedIn ? <TagAddForm /> : <p>Whoops, nothing here...</p>} />
           </Route>
           <Route path="category">
             <Route

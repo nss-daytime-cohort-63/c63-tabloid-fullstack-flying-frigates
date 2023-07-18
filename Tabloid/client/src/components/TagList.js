@@ -9,7 +9,7 @@ export default function TagManager() {
 
     const handleClick = () => {
 
-        navigate("/add")
+        navigate("/tag/add")
     }
 
     useEffect(() => {
