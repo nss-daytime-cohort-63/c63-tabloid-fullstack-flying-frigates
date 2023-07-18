@@ -70,15 +70,13 @@ ORDER BY p.PublishDateTime";
             }
         }
 
-<<<<<<< HEAD
-
         public void Update(Post post)
-        { 
+        {
             using (var conn = Connection)
-                {
+            {
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
-                { 
+                {
                     cmd.CommandText = @"
                         UPDATE Post
                             SET Title = @Title,
@@ -106,23 +104,20 @@ ORDER BY p.PublishDateTime";
         }
 
         public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
                 {
-                    using (var conn = Connection)
-                    {
-                        conn.Open();
-                        using (var cmd = conn.CreateCommand())
-                        {
-                            cmd.CommandText = @"DELETE FROM Post WHERE Id = @Id";
-                            DbUtils.AddParameter(cmd, "@id", id);
-                            cmd.ExecuteNonQuery();
-                        }
-                    }
+                    cmd.CommandText = @"DELETE FROM Post WHERE Id = @Id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
                 }
+            }
+        }
 
-        public void Add(Post post)
-=======
         public Post GetPost(int id)
->>>>>>> main
         {
             using (var conn = Connection)
             {
@@ -130,29 +125,6 @@ ORDER BY p.PublishDateTime";
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-<<<<<<< HEAD
-                        INSERT INTO Post
-                        (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
-                        OUTPUT INSERTED.ID
-                        VALUES 
-                        (@Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime, @IsApproved, @CategoryId, @UserProfileId)
-                        ";
-
-                    DbUtils.AddParameter(cmd, "@Title", post.Title);
-                    DbUtils.AddParameter(cmd, "@Content", post.Content);
-                    DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", DateTime.Now);
-                    DbUtils.AddParameter(cmd, "IsApproved", true);
-                    DbUtils.AddParameter(cmd, "CategoryId", post.CategoryId);
-                    DbUtils.AddParameter(cmd, "UserProfileId", post.UserProfileId);
-                    post.Id = (int)cmd.ExecuteScalar();
-
-                }
-            }
-        }
-        
-}
-=======
                 SELECT 
                     p.Id, p.Title, p.Content, p.ImageLocation, 
                     p.CreateDateTime, p.PublishDateTime, p.IsApproved, 
@@ -207,6 +179,38 @@ ORDER BY p.PublishDateTime";
             }
         }
 
+
+        public void Add(Post post)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        INSERT INTO Post (Title, Content, ImageLocation, CreateDateTime, PublishDateTime, IsApproved, CategoryId, UserProfileId)
+                        OUTPUT INSERTED.ID
+                        VALUES (@Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime, @IsApproved, @CategoryId, @UserProfileId)
+                        ";
+
+                    DbUtils.AddParameter(cmd, "@Title", post.Title);
+                    DbUtils.AddParameter(cmd, "@Content", post.Content);
+                    DbUtils.AddParameter(cmd, "@ImageLocation", post.ImageLocation);
+                    DbUtils.AddParameter(cmd, "@CreateDateTime", DateTime.Now);
+                    DbUtils.AddParameter(cmd, "@PublishDateTime", post.PublishDateTime);
+                    DbUtils.AddParameter(cmd, "@IsApproved", true);
+                    DbUtils.AddParameter(cmd, "@CategoryId", post.CategoryId);
+                    DbUtils.AddParameter(cmd, "@UserProfileId", post.UserProfileId);
+
+                    post.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
     }
->>>>>>> main
-}
+
+            
+  
+                   
+
+    }
+
