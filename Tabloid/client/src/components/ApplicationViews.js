@@ -9,6 +9,7 @@ import PostList from './PostList'
 import CategoryList from './CategoryList'
 import CategoryAddForm from './CategoryAddForm'
 import PostDetail from './PostDetail'
+import Comments from './Comments'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -47,6 +48,10 @@ export default function ApplicationViews({ isLoggedIn }) {
           <Route
             path="posts/:id"
             element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/comments/:id"
+            element={isLoggedIn ? <Comments /> : <Navigate to="/login" />}
           />
           <Route path="*" element={<p>Whoops, nothing here...</p>} />
         </Route>
