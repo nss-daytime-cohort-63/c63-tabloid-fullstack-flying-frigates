@@ -29,5 +29,13 @@ namespace Tabloid.Controllers
             _commentRepository.AddComment(newComment);
             return Ok();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteComment(int id)
+        {
+            _commentRepository.DeleteComment(id);
+            return Ok();
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { getAllCommentsByPostId } from '../modules/commentManager'
+import { getAllCommentsByPostId, deleteComment, } from '../modules/commentManager'
 import { getPostById } from '../modules/postManager'
 
 export default function Comments() {
@@ -13,6 +13,17 @@ export default function Comments() {
     getPostById(id).then(setPost)
   }, [id])
 
+
+const handleDeleteComment = (id) => {
+  if (window.confirm('Are you sure you want to delete this comment?')) {
+    deleteComment(id).then(() => {
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== id)
+      )
+    })
+  }
+}
+
   return (
     <div>
       <h2>{post.title}</h2>
@@ -24,6 +35,9 @@ export default function Comments() {
           <p>
             Created on: {new Date(comment.createDateTime).toLocaleDateString()}
           </p>
+          <button onClick={() => handleDeleteComment(comment.id)}>
+            Delete
+          </button>
         </div>
       ))}
       <Link to={`/posts/${id}`}>Back to Post</Link>
