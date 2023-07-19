@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Tabloid.Models;
 using Tabloid.Repositories;
 
 namespace Tabloid.Controllers
@@ -20,6 +21,13 @@ namespace Tabloid.Controllers
         {
             var comments = _commentRepository.GetCommentsByPostId(postId);
             return Ok(comments);
+        }
+
+        [HttpPost]
+        public IActionResult AddComment(Comment newComment)
+        {
+            _commentRepository.AddComment(newComment);
+            return Ok();
         }
     }
 }

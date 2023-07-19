@@ -12,6 +12,7 @@ import PostDetail from './PostDetail'
 import TagAddForm from './TagAddForm'
 import PostForm from './PostForm'
 import Comments from './Comments'
+import AddComment from './AddComment'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -27,7 +28,12 @@ export default function ApplicationViews({ isLoggedIn }) {
               path="manager"
               element={isLoggedIn ? <TagList /> : <Navigate to="/login" />}
             />
-            <Route path="add" element={isLoggedIn ? <TagAddForm /> : <p>Whoops, nothing here...</p>} />
+            <Route
+              path="add"
+              element={
+                isLoggedIn ? <TagAddForm /> : <p>Whoops, nothing here...</p>
+              }
+            />
           </Route>
           <Route path="category">
             <Route
@@ -43,9 +49,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           </Route>
           <Route
             path="newPost"
-            element={
-              isLoggedIn ? <PostForm /> : <Navigate to="/login" />
-            }
+            element={isLoggedIn ? <PostForm /> : <Navigate to="/login" />}
           />
         </Route>
         <Route path="login" element={<Login />} />
@@ -57,11 +61,17 @@ export default function ApplicationViews({ isLoggedIn }) {
           path="posts/:id"
           element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
         />
-        <Route path="comments/:id"
-        element={isLoggedIn ? <Comments /> : <Navigate to="/login" /> }
+        <Route
+          path="comments/:id"
+          element={isLoggedIn ? <Comments /> : <Navigate to="/login" />}
         />
+        <Route
+          path="/comments/add/:postId"
+          element={isLoggedIn ? <AddComment /> : <Navigate to="/login" />}
+        />
+
         <Route path="*" element={<p>Whoops, nothing here...</p>} />
       </Routes>
-    </main >
+    </main>
   )
 }

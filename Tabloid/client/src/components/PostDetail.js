@@ -15,6 +15,10 @@ const handleViewComments = () => {
   navigate(`/comments/${id}`)
 }
 
+const handleAddComment = () => {
+  navigate(`/comments/add/${id}`)
+}
+
   if (!post) {
     return null
   }
@@ -26,6 +30,7 @@ const handleViewComments = () => {
       <p>Author: {post.userProfile?.displayName}</p>
       <div>{post.content}</div>
       <button onClick={handleViewComments}>View Comments</button>
+      <button onClick={handleAddComment}>Add Comment</button>
     </div>
   )
 }
