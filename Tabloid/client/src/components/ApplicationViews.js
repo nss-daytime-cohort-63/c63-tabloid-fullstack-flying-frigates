@@ -13,6 +13,7 @@ import TagAddForm from './Tag/TagAddForm'
 import PostForm from './PostForm'
 import Comments from './Comments'
 import TagDeleteConfirmation from './Tag/TagDeleteConfirmation'
+import AddComment from './AddComment'
 import ConfirmDeleteCategory from './Category/CategoryDeleteConfirmation'
 
 export default function ApplicationViews({ isLoggedIn }) {
@@ -42,9 +43,7 @@ export default function ApplicationViews({ isLoggedIn }) {
           </Route>
           <Route
             path="newPost"
-            element={
-              isLoggedIn ? <PostForm /> : <Navigate to="/login" />
-            }
+            element={isLoggedIn ? <PostForm /> : <Navigate to="/login" />}
           />
         </Route>
         <Route path="login" element={<Login />} />
@@ -56,11 +55,17 @@ export default function ApplicationViews({ isLoggedIn }) {
           path="posts/:id"
           element={isLoggedIn ? <PostDetail /> : <Navigate to="/login" />}
         />
-        <Route path="comments/:id"
+        <Route
+          path="comments/:id"
           element={isLoggedIn ? <Comments /> : <Navigate to="/login" />}
         />
+        <Route
+          path="/comments/add/:postId"
+          element={isLoggedIn ? <AddComment /> : <Navigate to="/login" />}
+        />
+
         <Route path="*" element={<p>Whoops, nothing here...</p>} />
       </Routes>
-    </main >
+    </main>
   )
 }
