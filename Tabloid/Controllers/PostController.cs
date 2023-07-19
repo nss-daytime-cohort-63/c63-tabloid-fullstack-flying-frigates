@@ -50,11 +50,13 @@ namespace Tabloid.Controllers
         //    }
 
         //    DELETE api/<PostController>/5
-        //    [HttpDelete("{id}")]
-        //    public IActionResult Delete(int id)
-        //    {
-        //    }
-        //    */
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _postRepository.Delete(id);
+            return NoContent();
+        }
+        
         [HttpGet("{id}")]
         public IActionResult GetPost(int id)
         {

@@ -129,13 +129,45 @@ namespace Tabloid.Repositories
             }
         }
 
-     
+        public UserProfile SearchByEmail(string email)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, FirebaseUserId, DisplayName, FirstName, LastName, Email, CreateDateTime, ImageLocation, UserTypeId
+                        FROM UserProfile
+                        WHERE Email = @Email";
+
+                    DbUtils.AddParameter(cmd, "@Email", email);
+
+                    var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        UserProfile profile = new UserProfile();
+                        profile.Id = DbUtils.GetInt(reader, "id");
+
+                        reader.Close();
+
+                        return profile;
+
+                    }
+
+                    return null;
+
+
+
+                }
+
+            }
+        }
 
         //public void Add(UserProfile userProfile)
         //{
         //    _context.Add(userProfile);
         //    _context.SaveChanges();
         //}
-        
     }
 }
