@@ -1,31 +1,36 @@
-const _apiUrl = '/api/comment'
+import 'firebase/auth'
+import firebase from 'firebase/app'
 
-export const getComments = (postId) => {
-  return fetch(`${_apiUrl}/${postId}`).then((resp) => resp.json())
-}
+export const getToken = () => firebase.auth().currentUser.getIdToken()
 
-export const addComment = (postId, comment) => {
-  return fetch(`${_apiUrl}/${postId}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(comment),
+const apiUrl = '/api/comment'
+
+export const getAllCommentsByPostId = (postId) => {
+  return getToken().then((token) => {
+    return fetch(`${apiUrl}/${postId}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+      } else {
+        throw new Error('An unknown error occurred while trying to get comments.')
+      }
+    })
   })
 }
 
-export const updateComment = (commentId, comment) => {
-  return fetch(`${_apiUrl}/${commentId}`, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(comment),
-  })
-}
-
-export const deleteComment = (commentId) => {
-  return fetch(`${_apiUrl}/${commentId}`, {
-    method: 'DELETE',
+export const addComment = (comment) => {
+  return getToken().then((token) => {
+    return fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(comment),
+    })
   })
 }

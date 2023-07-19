@@ -37,6 +37,40 @@ namespace Tabloid.Repositories
         }
 
 
+
+        public void Add(Tag tag)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Tag ([Name])
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@name)";
+
+                    DbUtils.AddParameter(cmd, "@name", tag.Name);
+
+                    tag.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE Tag
+                                        WHERE Id = @id";
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         //good practice building more utility functions
         ///Use this idea in larger repositories to avoid repeated code
         private Tag NewTag(SqlDataReader reader)

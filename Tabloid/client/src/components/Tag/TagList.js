@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllTags } from "../modules/tagManager";
+import { getAllTags } from "../../modules/tagManager";
 import Tag from "./Tag";
+import { Button, Col } from "reactstrap";
 
 export default function TagManager() {
     const navigate = useNavigate();
@@ -9,7 +10,7 @@ export default function TagManager() {
 
     const handleClick = () => {
 
-        navigate("/add")
+        navigate("/tag/add")
     }
 
     useEffect(() => {
@@ -18,12 +19,12 @@ export default function TagManager() {
 
     return (
         <div>
-            <button onClick={handleClick}>Create a tag</button>
-            <section>
+            <Button onClick={handleClick}>Create a tag</Button>
+            <Col className="col-3">
                 {tags.map((tag) => (
                     <Tag key={tag.id} tag={tag} />
                 ))}
-            </section>
+            </Col>
         </div>
     );
 }
