@@ -6,14 +6,15 @@ import Hello from './Hello'
 import TagList from './Tag/TagList'
 import UserProfileList from './UserProfile'
 import PostList from './PostList'
-import CategoryList from './CategoryList'
-import CategoryAddForm from './CategoryAddForm'
+import CategoryList from './Category/CategoryList'
+import CategoryAddForm from './Category/CategoryAddForm'
 import PostDetail from './PostDetail'
 import TagAddForm from './Tag/TagAddForm'
 import PostForm from './PostForm'
 import Comments from './Comments'
 import TagDeleteConfirmation from './Tag/TagDeleteConfirmation'
 import AddComment from './AddComment'
+import ConfirmDeleteCategory from './Category/CategoryDeleteConfirmation'
 
 export default function ApplicationViews({ isLoggedIn }) {
   return (
@@ -37,12 +38,8 @@ export default function ApplicationViews({ isLoggedIn }) {
               path="manager"
               element={isLoggedIn ? <CategoryList /> : <Navigate to="/login" />}
             />
-            <Route
-              path="add"
-              element={
-                isLoggedIn ? <CategoryAddForm /> : <Navigate to="/login" />
-              }
-            />
+            <Route path="add" element={isLoggedIn ? <CategoryAddForm /> : <Navigate to="/login" />} />
+            <Route path="delete/:id" element={isLoggedIn ? <ConfirmDeleteCategory /> : <Navigate to="/login" />} />
           </Route>
           <Route
             path="newPost"
