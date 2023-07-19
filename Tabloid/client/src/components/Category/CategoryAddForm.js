@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, FormGroup, Label, Input, Card, CardHeader, CardTitle, CardBody } from "reactstrap";
-import { addCategory } from "../modules/categoryManager";
+import { addCategory } from "../../modules/categoryManager";
 
 export default function CategoryAddForm() {
   const navigate = useNavigate();

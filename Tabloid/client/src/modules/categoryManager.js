@@ -20,6 +20,7 @@ export const getAllCategories = () => {
     })
   })
 };
+
 export const deleteCategory = (id) => {
   return getToken().then((token) => {
     return fetch(`${apiUrl}/${id}`, {
@@ -27,9 +28,8 @@ export const deleteCategory = (id) => {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    }).then(response => response.json())
-      .then(() => { getAllCategories() })
-  })
+    })
+  });
 };
 
 export const getCategoryById = (id) => {
