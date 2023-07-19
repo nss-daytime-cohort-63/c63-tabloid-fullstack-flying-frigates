@@ -1,15 +1,12 @@
 import { useState, useEffect } from "react";
-import { getAllCategories } from "../modules/categoryManager";
+import { deleteCategory, getAllCategories, editCategory } from "../modules/categoryManager";
 import { Category } from "./Category";
 import { useNavigate } from "react-router-dom";
+import { Button } from "reactstrap";
 
 export default function CategoryList() {
   const navigate = useNavigate();
   const [categories, setCategories] = useState([]);
-
-  const handleClick = () => {
-    navigate("/category/add");
-  };
 
   useEffect(() => {
     getAllCategories().then(setCategories)
@@ -17,12 +14,20 @@ export default function CategoryList() {
 
   return (
     <div>
-      <button onClick={handleClick}>Add Category</button>
-      <section>
-        {categories.map((category) => (
+      <Button variant="success" onClick={() => { navigate("/category/add") }}>
+        Add New Category
+      </Button>
+      {categories.map((category) => (
+        <section key={category.id}>
           <Category key={category.id} category={category} />
-        ))}
-      </section>
+          <Button variant="primary" onClick={() => { navigate(`/category/${category.id}/edit`) }} >
+            Edit
+          </Button>
+          <Button variant="danger" onClick={() => { deleteCategory(category.id) }}>
+            Delete
+          </Button>
+        </section>
+      ))}
     </div>
   )
 }

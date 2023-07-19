@@ -5,11 +5,12 @@ import { addCategory } from "../modules/categoryManager";
 
 export default function CategoryAddForm() {
   const navigate = useNavigate();
-  const [newCategoryName, setNewCategoryName] = useState();
+  const [categoryName, setCategoryName] = useState();
+
 
   const submitForm = (e) => {
     e.preventDefault();
-    addCategory({ name: newCategoryName })
+    addCategory({ name: categoryName })
       .then(() => navigate("/category/manager"))
       .catch((err) => alert(`An error ocurred: ${err.message}`));
   };
@@ -28,16 +29,16 @@ export default function CategoryAddForm() {
           </CardTitle>
           <CardBody>
 
-            <Label for="newCategoryName">
+            <Label for="categoryName">
               <h5>
                 Category Name:
               </h5>
             </Label>
             <br></br>
             <Input
-              id="newCategoryName"
+              id="categoryName"
               type="textarea"
-              onChange={(e) => setNewCategoryName(e.target.value)}
+              onChange={(e) => setCategoryName(e.target.value)}
             />
           </CardBody>
         </FormGroup>
