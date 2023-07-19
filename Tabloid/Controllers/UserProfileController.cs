@@ -9,7 +9,7 @@ namespace Tabloid.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    
     public class UserProfileController : ControllerBase
     {
         private readonly IUserProfileRepository _userProfileRepository;
@@ -29,6 +29,13 @@ namespace Tabloid.Controllers
         public IActionResult GetUserProfile(string firebaseUserId)
         {
             return Ok(_userProfileRepository.GetByFirebaseUserId(firebaseUserId));
+        }
+
+        [HttpGet("userSearch/{email}")]
+        
+        public IActionResult SearchUserProfile(string email)
+        {
+            return Ok(_userProfileRepository.SearchByEmail(email));
         }
 
         [HttpGet("DoesUserExist/{firebaseUserId}")]
@@ -55,5 +62,7 @@ namespace Tabloid.Controllers
                 new { firebaseUserId = userProfile.FirebaseUserId },
                 userProfile);
         }
+
+        
     }
 }

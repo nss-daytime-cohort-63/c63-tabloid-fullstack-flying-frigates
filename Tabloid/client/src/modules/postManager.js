@@ -58,3 +58,15 @@ export const getPostById = (id) => {
     })
   })
 }
+
+export const deletePost = (postId) => {
+  return getToken().then((token) => {
+    return fetch(`${apiUrl}/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+
+    })
+  })
+}

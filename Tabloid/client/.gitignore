@@ -24,6 +24,8 @@ yarn-debug.log*
 yarn-error.log*
 appsettings.json
 package.json
+package-lock.json
+
 
 
 

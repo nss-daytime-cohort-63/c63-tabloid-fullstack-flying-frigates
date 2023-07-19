@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import { json } from "react-router-dom";
 
 const _apiUrl = "/api/userprofile";
 
@@ -44,8 +45,31 @@ export const login = (email, pw) => {
     }).catch(err => {
       console.error(err);
       throw err;
-    });
+    })
+
 };
+
+export const setLocalUserId = (email) => {
+  return getToken().then((token) => {
+    return fetch(`${_apiUrl}/userSearch/${email}`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json()
+          .then(userProfile => {
+            localStorage.setItem("tabloid_user", JSON.stringify({
+              id: userProfile.id
+            }))
+          })
+      } else {
+        throw new Error(`Failed to get user with email ${email}`)
+      }
+    })
+  })
+}
 
 
 export const logout = () => {
@@ -55,9 +79,9 @@ export const logout = () => {
 
 export const register = (userProfile, password) => {
   return firebase.auth().createUserWithEmailAndPassword(userProfile.email, password)
-    .then((createResponse) => _saveUser({ 
-      ...userProfile, 
-      firebaseUserId: createResponse.user.uid 
+    .then((createResponse) => _saveUser({
+      ...userProfile,
+      firebaseUserId: createResponse.user.uid
     }));
 };
 
@@ -67,4 +91,5 @@ export const onLoginStatusChange = (onLoginStatusChangeHandler) => {
     onLoginStatusChangeHandler(!!user);
   });
 };
+
 
